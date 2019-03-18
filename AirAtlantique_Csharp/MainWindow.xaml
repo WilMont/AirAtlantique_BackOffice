@@ -31,7 +31,7 @@
         </Grid.Background>
         <Frame x:Name="ContenuPage" NavigationUIVisibility="Hidden" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="7" Grid.RowSpan="7"/>
 
-        <Button x:Name="BtnAccueil" Background="White" Grid.Row="0" Grid.ColumnSpan="1" Grid.RowSpan="1" Click="BtnAccueil_Click" >Accueil</Button>
+        <Button x:Name="BtnAccueil" Background="White" Grid.Row="0" Grid.ColumnSpan="1" Grid.RowSpan="1" Click="BtnAccueil_Click">Accueil</Button>
         <Button x:Name="BtnGestionDesAvions" Background="White" Grid.Column="1" Grid.ColumnSpan="1" Grid.RowSpan="1" Click="BtnGestionDesAvions_Click">Avions</Button>
         <Button x:Name="BtnGestionDesAeroports" Background="White" Grid.Column="2" Grid.ColumnSpan="1" Grid.RowSpan="1" Click="BtnGestionDesAeroports_Click">Aéroports</Button>
         <Button x:Name="BtnGestionDesVols" Background="White" Grid.Column="3" Grid.ColumnSpan="1" Grid.RowSpan="1" Click="BtnGestionDesVols_Click">Vols</Button>
