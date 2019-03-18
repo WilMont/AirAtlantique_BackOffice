@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AirAtlantique_Csharp.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,61 @@ namespace AirAtlantique_Csharp
         public MainWindow()
         {
             InitializeComponent();
+            ContenuPage.Content = new AccueilView();
+            BtnAccueil.Background = Brushes.Azure;
         }
+
+        #region MENU_GAUCHE
+        private void BtnAccueil_Click(object sender, RoutedEventArgs e)
+        {
+            ContenuPage.Content = new AccueilView();
+            RAZDesCouleursBoutons();
+            BtnAccueil.Background = Brushes.Azure;
+        }
+
+        private void BtnGestionDesAvions_Click(object sender, RoutedEventArgs e)
+        {
+            ContenuPage.Content = new GestionAvionsView();
+            RAZDesCouleursBoutons();
+            BtnGestionDesAvions.Background = Brushes.Azure;
+        }
+
+        private void BtnGestionDesAeroports_Click(object sender, RoutedEventArgs e)
+        {
+            ContenuPage.Content = new GestionAeroportsView();
+            RAZDesCouleursBoutons();
+            BtnGestionDesAeroports.Background = Brushes.Azure;
+        }
+
+        private void BtnGestionDesVols_Click(object sender, RoutedEventArgs e)
+        {
+            ContenuPage.Content = new GestionVolsView();
+            RAZDesCouleursBoutons();
+            BtnGestionDesVols.Background = Brushes.Azure;
+        }
+
+        private void BtnGestionDesClients_Click(object sender, RoutedEventArgs e)
+        {
+            ContenuPage.Content = new GestionClientsView();
+            RAZDesCouleursBoutons();
+            BtnGestionDesClients.Background = Brushes.Azure;
+        }
+        #endregion
+
+        #region FONCTIONS_DIVERSES
+
+        private void RAZDesCouleursBoutons()
+        {
+            BtnAccueil.Background = Brushes.White;
+            BtnGestionDesAvions.Background = Brushes.White;
+            BtnGestionDesAeroports.Background = Brushes.White;
+            BtnGestionDesVols.Background = Brushes.White;
+            BtnGestionDesClients.Background = Brushes.White;
+        }
+
+        #endregion
+
+
+
     }
 }
