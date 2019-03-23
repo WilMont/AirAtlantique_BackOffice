@@ -65,7 +65,7 @@
     </ApplicationDefinition>
     <Compile Include="BDD_connexion.cs" />
     <Compile Include="Models\Client.cs" />
-    <Compile Include="Models\DAL\ClientDAL.cs" />
+    <Compile Include="ViewModels\Queries\ClientDAL.cs" />
     <Compile Include="test.xaml.cs">
       <DependentUpon>test.xaml</DependentUpon>
     </Compile>
