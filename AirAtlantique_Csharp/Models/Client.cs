@@ -1,16 +1,12 @@
-﻿using AirAtlantique_Csharp.Models.DAL;
+﻿using AirAtlantique_Csharp.ViewModels.Queries;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AirAtlantique_Csharp.Models
 {
-    class Client : INotifyPropertyChanged
+    public class Client : INotifyPropertyChanged
     {
-        private int idClient;
+        private int id;
         private string nom;
         private string prenom;
         private string pays;
@@ -18,15 +14,12 @@ namespace AirAtlantique_Csharp.Models
         private string codePostal;
         private string telephone;
         private string adresse;
-        private int ptsFidelite;
-        private int idDernierVol;
-        private DateTime dateDernierVol;
 
         public Client() { }
 
-        public Client(int idClient, string nom, string prenom, string pays, string ville, string codePostal, string telephone, string adresse, int ptsFidelite, int idDernierVol, DateTime dateDernierVol)
+        public Client(int id, string nom, string prenom, string pays, string ville, string codePostal, string telephone, string adresse)
         {
-            this.idClient = idClient;
+            this.id = id;
             this.nom = nom;
             this.prenom = prenom;
             this.pays = pays;
@@ -34,14 +27,11 @@ namespace AirAtlantique_Csharp.Models
             this.codePostal = codePostal;
             this.telephone = telephone;
             this.adresse = adresse;
-            this.ptsFidelite = ptsFidelite;
-            this.idDernierVol = idDernierVol;
-            this.dateDernierVol = dateDernierVol;
         }
 
-        public int IdClientProperty
+        public int IdProperty
         {
-            get { return idClient; }
+            get { return id; }
         }
 
         public string NomProperty
@@ -84,23 +74,6 @@ namespace AirAtlantique_Csharp.Models
         {
             get { return adresse; }
             set { this.adresse = value; OnPropertyChanged("AdresseProperty"); }
-        }
-
-        public int PtsFideliteProperty
-        {
-            get { return ptsFidelite; }
-            set { this.ptsFidelite = value; OnPropertyChanged("PtsFideliteProperty"); }
-        }
-
-        public int IdDernierVolProperty
-        {
-            get { return idDernierVol; }
-        }
-
-        public DateTime DateDernierVolProperty
-        {
-            get { return dateDernierVol; }
-            set { this.dateDernierVol = value; OnPropertyChanged("DateDernierVolProperty"); }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

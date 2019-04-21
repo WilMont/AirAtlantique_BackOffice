@@ -64,12 +64,16 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BDD_connexion.cs" />
+    <Compile Include="Command\RelayCommand.cs" />
+    <Compile Include="Models\Avion.cs" />
     <Compile Include="Models\Client.cs" />
+    <Compile Include="ViewModels\AvionViewModel.cs" />
+    <Compile Include="ViewModels\ClientViewModel.cs" />
+    <Compile Include="ViewModels\Queries\AvionDAL.cs" />
     <Compile Include="ViewModels\Queries\ClientDAL.cs" />
     <Compile Include="test.xaml.cs">
       <DependentUpon>test.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\GestionClientsViewModel.cs" />
     <Compile Include="Views\AccueilView.xaml.cs">
       <DependentUpon>AccueilView.xaml</DependentUpon>
     </Compile>

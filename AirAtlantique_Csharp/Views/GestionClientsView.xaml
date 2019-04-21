@@ -6,9 +6,10 @@
       mc:Ignorable="d" 
       d:DesignHeight="500" d:DesignWidth="1000"
       Title="GestionClientsView"
+      xmlns:local="clr-namespace:AirAtlantique_Csharp"
       xmlns:vm="clr-namespace:AirAtlantique_Csharp.ViewModels">
     <Page.DataContext>
-        <vm:GestionClientsViewModel/>
+        <vm:ClientViewModel/>
     </Page.DataContext>
 
     <Grid>
@@ -36,7 +37,7 @@
 
         <DataGrid Name="listeClients" ItemsSource="{Binding}" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="7" Grid.RowSpan="7" Background="#335C90">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id Client" Binding="{Binding idClientProperty, Mode=OneWay}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Id Client" Binding="{Binding idProperty, Mode=OneWay}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Nom" Binding="{Binding NomProperty, Mode=TwoWay}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Prénom" Binding="{Binding PrenomProperty, Mode=TwoWay}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Pays" Binding="{Binding PaysProperty, Mode=TwoWay}"></DataGridTextColumn>

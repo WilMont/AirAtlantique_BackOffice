@@ -23,9 +23,9 @@ namespace AirAtlantique_Csharp
             {
 
                 server = "localhost";
-                database = "airatlantiquecsharp";
+                database = "airatlantiquebdd";
                 uid = "root";
-                password = "Epsi2018!";
+                password = "Epsi2019!";
                 port = 3306;
                 string connectionString;
                 connectionString = "SERVER=" + server + ";" + "Port=" + port + ";" + "DATABASE=" +
