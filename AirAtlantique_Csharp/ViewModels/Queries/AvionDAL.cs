@@ -33,7 +33,7 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
         public static void UpdateAvion(Avion a)
         {
             connection.Open();
-            string query = "UPDATE avions SET modele=\"" + a.ModeleProperty + "\",motorisation=\"" + a.MotorisationProperty + "\",capacite=\"" + a.CapaciteProperty + "\",nb_place_premium=\"" + a.NbPlacesPremiumProperty + "\",nb_place_business=\"" + a.NbPlacesBusinessProperty + "\",nb_place_eco=\"" + a.NbPlacesEcoProperty + "\" WHERE idAvion=" + a.IdProperty + "";
+            string query = "UPDATE avion SET modele=\"" + a.ModeleProperty + "\",motorisation=\"" + a.MotorisationProperty + "\",capacite=\"" + a.CapaciteProperty + "\",nb_places_premium=\"" + a.NbPlacesPremiumProperty + "\",nb_places_business=\"" + a.NbPlacesBusinessProperty + "\",nb_places_eco=\"" + a.NbPlacesEcoProperty + "\" WHERE idAvion=" + a.IdProperty + "";
             MySqlCommand cmd = new MySqlCommand(query, connection);
             //MySqlDataAdapter sqlDataAdap = new MySqlDataAdapter(cmd);
             cmd.ExecuteNonQuery();
@@ -43,7 +43,7 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
         public static void InsertAvion(string mo, string moto, int capa, int prem, int busi, int eco)
         {
             connection.Open();
-            string query = "INSERT INTO avion(modele, motorisation, capacite, nb_place_premium, nb_place_business, nb_place_eco) VALUES(@mo,@moto,@capa,@prem,@busi,@eco)";
+            string query = "INSERT INTO avion(modele, motorisation, capacite, nb_places_premium, nb_places_business, nb_places_eco) VALUES(@mo,@moto,@capa,@prem,@busi,@eco)";
             MySqlCommand cmd = new MySqlCommand(query, connection);
             cmd.Parameters.AddWithValue("@mo", mo);
             cmd.Parameters.AddWithValue("@moto", moto);

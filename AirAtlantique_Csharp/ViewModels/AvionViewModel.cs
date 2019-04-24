@@ -6,6 +6,8 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
+using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace AirAtlantique_Csharp.ViewModels
@@ -15,11 +17,27 @@ namespace AirAtlantique_Csharp.ViewModels
 
         public AvionViewModel()
         {
-            int lastId = lastId = AvionDAL.GetLastId();
-            Avion Avion = new Avion(lastId, null, null, 0, 0, 0, 0);
+            try
+            {
+                int lastId = lastId = AvionDAL.GetLastId();
+                Avion Avion = new Avion(lastId, null, null, 0, 0, 0, 0);
+            }
+            catch
+            {
+                MessageBox.Show("Une erreur est survenue\nERREUR: Impossible de récupérer le dernier ID dans la base de données.");
+            }
+            
 
-            ListeAvions = new ObservableCollection<Avion>();
-            AvionDAL.SelectAvion(ListeAvions);
+            try
+            {
+                ListeAvions = new ObservableCollection<Avion>();
+                AvionDAL.SelectAvion(ListeAvions);
+            }
+            catch
+            {
+                MessageBox.Show("Une erreur est survenue\nERREUR: Impossible de se connecter à la base de données, vérifiez les informations.");
+            }
+            
 
            
         }
@@ -46,7 +64,7 @@ namespace AirAtlantique_Csharp.ViewModels
             }
         }
 
-        /*private ICommand _SubmitCommand;
+        private ICommand _SubmitCommand;
 
         public ICommand SubmitCommand
         {
@@ -64,13 +82,21 @@ namespace AirAtlantique_Csharp.ViewModels
 
         private void SubmitExecute(object parameter)
         {
-            //ListeAvions.Add(Avion);
+            AvionDAL.InsertAvion(NewModele, NewMotorisation, NewCapacite, NewNbPlacesPremium, NewNbPlacesBusiness, NewNbPlacesEco);
+            
+            NewModele = null;
+            NewMotorisation = null;
+            NewCapacite = 0;
+            NewNbPlacesPremium = 0;
+            NewNbPlacesBusiness = 0;
+            NewNbPlacesEco = 0;
 
+            MessageBox.Show("L'avion a bien été crée");
         }
 
         private bool CanSubmitExecute(object parameter)
         {
-            if (string.IsNullOrEmpty(Avion.ModeleProperty) || string.IsNullOrEmpty(Avion.MotorisationProperty) || string.IsNullOrEmpty(Avion.NbPlacesPremiumProperty.ToString()) || string.IsNullOrEmpty(Avion.NbPlacesBusinessProperty.ToString()) || string.IsNullOrEmpty(Avion.NbPlacesEcoProperty.ToString()))
+            if (string.IsNullOrEmpty(NewModele) || string.IsNullOrEmpty(NewMotorisation) || string.IsNullOrEmpty(NewCapacite.ToString()) || string.IsNullOrEmpty(NewNbPlacesPremium.ToString()) || string.IsNullOrEmpty(NewNbPlacesBusiness.ToString()) || string.IsNullOrEmpty(NewNbPlacesEco.ToString()))
             {
                 return false;
             }
@@ -78,53 +104,104 @@ namespace AirAtlantique_Csharp.ViewModels
             {
                 return true;
             }
-        }*/
+        }
 
         #region Créer avion
 
-
-        private ICommand _testCommand;
-
-        public ICommand TestCommand
+        private string _newModele;
+        public string NewModele
         {
-            get
+            get { return this._newModele; }
+            set
             {
-                if (_testCommand == null)
+                if (this._newModele != value)
                 {
-                    _testCommand = new RelayCommand(TestExecute, CanTestExecute, false);
+                    this._newModele = value;
+                    this.NotifyPropertyChanged("NewModele");
                 }
-                return _testCommand;
             }
         }
 
-
-
-        private void TestExecute(object parameter)
+        private string _newMotorisation;
+        public string NewMotorisation
         {
-            AvionDAL.InsertAvion(Avion.ModeleProperty, Avion.MotorisationProperty, Avion.CapaciteProperty,Avion.NbPlacesPremiumProperty, Avion.NbPlacesBusinessProperty, Avion.NbPlacesEcoProperty);
-
+            get { return this._newMotorisation; }
+            set
+            {
+                if (this._newMotorisation != value)
+                {
+                    this._newMotorisation = value;
+                    this.NotifyPropertyChanged("NewMotorisation");
+                }
+            }
         }
 
-        private bool CanTestExecute(object parameter)
+        private int _newCapacite;
+        public int NewCapacite
         {
-            if (string.IsNullOrEmpty(Avion.ModeleProperty) || string.IsNullOrEmpty(Avion.MotorisationProperty) || string.IsNullOrEmpty(Avion.NbPlacesPremiumProperty.ToString()) || string.IsNullOrEmpty(Avion.NbPlacesBusinessProperty.ToString()) || string.IsNullOrEmpty(Avion.NbPlacesEcoProperty.ToString()))
+            get { return this._newCapacite; }
+            set
             {
-                return false;
-            }
-            else
-            {
-                return true;
+                if (this._newCapacite != value)
+                {
+                    this._newCapacite = value;
+                    this.NotifyPropertyChanged("NewCapacite");
+                }
             }
         }
+
+        private int _newNbPlacesPremium;
+        public int NewNbPlacesPremium
+        {
+            get { return this._newNbPlacesPremium; }
+            set
+            {
+                if (this._newNbPlacesPremium != value)
+                {
+                    this._newNbPlacesPremium = value;
+                    this.NotifyPropertyChanged("NewNbPlacesPremium");
+                }
+            }
+        }
+
+        private int _newNbPlacesBusiness;
+        public int NewNbPlacesBusiness
+        {
+            get { return this._newNbPlacesBusiness; }
+            set
+            {
+                if (this._newNbPlacesBusiness != value)
+                {
+                    this._newNbPlacesBusiness = value;
+                    this.NotifyPropertyChanged("NewNbPlacesBusiness");
+                }
+            }
+        }
+
+        private int _newNbPlacesEco;
+        public int NewNbPlacesEco
+        {
+            get { return this._newNbPlacesEco; }
+            set
+            {
+                if (this._newNbPlacesEco != value)
+                {
+                    this._newNbPlacesEco = value;
+                    this.NotifyPropertyChanged("NewNbPlacesEco");
+                }
+            }
+        }
+
         #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void NotifyPropertyChanged(string propertyName)
+        private void NotifyPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                AvionDAL.UpdateAvion(Avion);
             }
         }
 
