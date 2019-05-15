@@ -10,19 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace AirAtlantique_Csharp.Views
 {
     /// <summary>
-    /// Logique d'interaction pour GestionVolsView.xaml
+    /// Logique d'interaction pour AjouterAvionWindow.xaml
     /// </summary>
-    public partial class GestionVolsView : Page
+    public partial class AjouterAvionWindow : Window
     {
-        public GestionVolsView()
+        public AjouterAvionWindow()
         {
             InitializeComponent();
+        }
+
+        private void Btn_Creer(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

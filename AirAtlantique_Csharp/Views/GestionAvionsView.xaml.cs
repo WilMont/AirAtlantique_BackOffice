@@ -24,5 +24,14 @@ namespace AirAtlantique_Csharp.Views
         {
             InitializeComponent();
         }
+
+        private void Btn_AjouterAvion(object sender, RoutedEventArgs e)
+        {
+            AjouterAvionWindow ajouterAvionWindow = new AjouterAvionWindow();
+            ajouterAvionWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            ajouterAvionWindow.Show();
+
+
+        }
     }
 }

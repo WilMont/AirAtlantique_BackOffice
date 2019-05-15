@@ -65,17 +65,35 @@
     </ApplicationDefinition>
     <Compile Include="BDD_connexion.cs" />
     <Compile Include="Command\RelayCommand.cs" />
+    <Compile Include="Models\Aeroport.cs" />
     <Compile Include="Models\Avion.cs" />
     <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\Utilisateur.cs" />
+    <Compile Include="Models\Vol.cs" />
+    <Compile Include="ViewModels\AeroportViewModel.cs" />
     <Compile Include="ViewModels\AvionViewModel.cs" />
     <Compile Include="ViewModels\ClientViewModel.cs" />
+    <Compile Include="ViewModels\Queries\AeroportDAL.cs" />
     <Compile Include="ViewModels\Queries\AvionDAL.cs" />
     <Compile Include="ViewModels\Queries\ClientDAL.cs" />
     <Compile Include="test.xaml.cs">
       <DependentUpon>test.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Queries\UtilisateurDAL.cs" />
+    <Compile Include="ViewModels\Queries\VolDAL.cs" />
+    <Compile Include="ViewModels\UtilisateurViewModel.cs" />
+    <Compile Include="ViewModels\VolViewModel.cs" />
     <Compile Include="Views\AccueilView.xaml.cs">
       <DependentUpon>AccueilView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AjouterAeroportWindow.xaml.cs">
+      <DependentUpon>AjouterAeroportWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AjouterAvionWindow.xaml.cs">
+      <DependentUpon>AjouterAvionWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AjouterVolWindow.xaml.cs">
+      <DependentUpon>AjouterVolWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\GestionAeroportsView.xaml.cs">
       <DependentUpon>GestionAeroportsView.xaml</DependentUpon>
@@ -85,9 +103,6 @@
     </Compile>
     <Compile Include="Views\GestionClientsView.xaml.cs">
       <DependentUpon>GestionClientsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\GestionVolsView.xaml.cs">
-      <DependentUpon>GestionVolsView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -109,6 +124,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AjouterAeroportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AjouterAvionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AjouterVolWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\GestionAeroportsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -118,10 +145,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\GestionClientsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\GestionVolsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

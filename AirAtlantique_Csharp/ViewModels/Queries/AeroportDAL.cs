@@ -3,62 +3,58 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace AirAtlantique_Csharp.ViewModels.Queries
 {
-    public class AvionDAL
+    public class AeroportDAL
     {
         private static MySqlConnection connection = BDD_connexion.GetConnection();
 
-        public static void SelectAvion(ObservableCollection<Avion> ObsColAvion)
+        public static void SelectAeroport(ObservableCollection<Aeroport> ObsColAeroport)
         {
             connection.Close();
             connection.Open();
-            string query = "SELECT a.id,a.modele,a.motorisation,a.capacite,a.nb_places_premium,a.nb_places_business,a.nb_places_eco FROM avion a Group BY a.id";
+            string query = "SELECT aero.id,aero.aita,aero.pays,aero.ville FROM aeroport aero Group BY aero.id";
             MySqlCommand cmd = new MySqlCommand(query, connection);
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                Avion a = new Avion(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3), reader.GetInt32(4), reader.GetInt32(5), reader.GetInt32(6));
-                ObsColAvion.Add(a);
+                Aeroport aero = new Aeroport(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3));
+                ObsColAeroport.Add(aero);
             }
             reader.Close();
             connection.Close();
         }
 
-        public static void UpdateAvion(Avion a)
+        public static void UpdateAeroport(Aeroport aero)
         {
             connection.Open();
-            string query = "UPDATE avion SET modele=\"" + a.ModeleProperty + "\",motorisation=\"" + a.MotorisationProperty + "\",capacite=\"" + a.CapaciteProperty + "\",nb_places_premium=\"" + a.NbPlacesPremiumProperty + "\",nb_places_business=\"" + a.NbPlacesBusinessProperty + "\",nb_places_eco=\"" + a.NbPlacesEcoProperty + "\" WHERE id=" + a.IdProperty + "";
+            string query = "UPDATE Aeroport SET aita=\"" + aero.AitaProperty + "\",pays=\"" + aero.PaysProperty + "\",ville=\"" + aero.VilleProperty + "\" WHERE id=" + aero.IdProperty + "";
             MySqlCommand cmd = new MySqlCommand(query, connection);
             //MySqlDataAdapter sqlDataAdap = new MySqlDataAdapter(cmd);
             cmd.ExecuteNonQuery();
             connection.Close();
         }
 
-        public static void InsertAvion(string mo, string moto, int capa, int prem, int busi, int eco)
+        public static void InsertAeroport(string aita, string pays, string ville)
         {
             connection.Open();
-            string query = "INSERT INTO avion(modele, motorisation, capacite, nb_places_premium, nb_places_business, nb_places_eco) VALUES(@mo,@moto,@capa,@prem,@busi,@eco)";
+            string query = "INSERT INTO aeroport(aita, pays, ville) VALUES(@aita,@pays,@ville)";
             MySqlCommand cmd = new MySqlCommand(query, connection);
-            cmd.Parameters.AddWithValue("@mo", mo);
-            cmd.Parameters.AddWithValue("@moto", moto);
-            cmd.Parameters.AddWithValue("@capa", capa);
-            cmd.Parameters.AddWithValue("@prem", prem);
-            cmd.Parameters.AddWithValue("@busi", busi);
-            cmd.Parameters.AddWithValue("@eco", eco);
+            cmd.Parameters.AddWithValue("@aita", aita);
+            cmd.Parameters.AddWithValue("@pays", pays);
+            cmd.Parameters.AddWithValue("@ville", ville);
             cmd.ExecuteNonQuery();
             connection.Close();
         }
 
-        public static void DeleteAvion(int id)
+        public static void DeleteAeroport(int id)
         {
             connection.Open();
-            string query = "DELETE FROM avion WHERE id = @id";
+            string query = "DELETE FROM Aeroport WHERE id = @id";
             MySqlCommand cmd = new MySqlCommand(query, connection);
             cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();
@@ -70,7 +66,7 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
             int lastId = new int();
 
             connection.Open();
-            string query = "SELECT id FROM avion ORDER BY id DESC limit 1";
+            string query = "SELECT id FROM Aeroport ORDER BY id DESC limit 1";
             MySqlCommand cmd = new MySqlCommand(query, connection);
             cmd.ExecuteNonQuery();
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -83,6 +79,5 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
 
             return lastId;
         }
-
     }
 }

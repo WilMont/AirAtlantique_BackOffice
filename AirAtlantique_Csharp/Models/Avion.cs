@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AirAtlantique_Csharp.Models
 {
-    public class Avion
+    public class Avion : INotifyPropertyChanged
     {
 
         public Avion(int id, string modele, string motorisation, int capacite, int nbPlacesPremium, int nbPlacesBusiness, int nbPlacesEco)

@@ -10,29 +10,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace AirAtlantique_Csharp.Views
 {
     /// <summary>
-    /// Logique d'interaction pour GestionAeroportsView.xaml
+    /// Logique d'interaction pour AjouterVolWindow.xaml
     /// </summary>
-    public partial class GestionAeroportsView : Page
+    public partial class AjouterVolWindow : Window
     {
-        public GestionAeroportsView()
+        public AjouterVolWindow()
         {
             InitializeComponent();
-
         }
 
-        private void Btn_AjouterAeroport(object sender, RoutedEventArgs e)
+        private void Btn_Creer(object sender, RoutedEventArgs e)
         {
-            AjouterAeroportWindow ajouterAeroportWindow = new AjouterAeroportWindow();
-            ajouterAeroportWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            ajouterAeroportWindow.Show();
-           
-            
+            this.Close();
         }
+
     }
 }

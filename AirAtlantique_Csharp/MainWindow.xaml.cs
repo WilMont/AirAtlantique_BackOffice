@@ -52,7 +52,7 @@ namespace AirAtlantique_Csharp
 
         private void BtnGestionDesVols_Click(object sender, RoutedEventArgs e)
         {
-            ContenuPage.Content = new GestionVolsView();
+           // ContenuPage.Content = new GestionVolsView();
             RAZDesCouleursBoutons();
             BtnGestionDesVols.Background = Brushes.Azure;
         }

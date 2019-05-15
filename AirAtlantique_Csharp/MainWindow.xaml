@@ -26,7 +26,8 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
-            </Grid.RowDefinitions><Grid.Background>
+            </Grid.RowDefinitions>
+        <Grid.Background>
             <ImageBrush ImageSource="Images/img_ciel.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
         <Frame x:Name="ContenuPage" NavigationUIVisibility="Hidden" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="7" Grid.RowSpan="7"/>

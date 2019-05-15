@@ -1,6 +1,7 @@
 ﻿using AirAtlantique_Csharp.Command;
 using AirAtlantique_Csharp.Models;
 using AirAtlantique_Csharp.ViewModels.Queries;
+using AirAtlantique_Csharp.Views;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.ObjectModel;
@@ -35,7 +36,7 @@ namespace AirAtlantique_Csharp.ViewModels
             }
             catch
             {
-                MessageBox.Show("Une erreur est survenue\nERREUR: Impossible de se connecter à la base de données, vérifiez les informations.");
+                MessageBox.Show("Une erreur est survenue\nERREUR: Impossible de récupérer la table [Avion] \nVérifiez la connexion à la base de données.");
             }
             
 
@@ -50,64 +51,22 @@ namespace AirAtlantique_Csharp.ViewModels
             set { _avion = value; NotifyPropertyChanged("Avion"); }
         }
 
-        private ObservableCollection<Avion> _ListeAvions;
+        private ObservableCollection<Avion> _listeAvions;
         public ObservableCollection<Avion> ListeAvions
         {
             get
             {
-                return _ListeAvions;
+                return _listeAvions;
             }
             set
             {
-                _ListeAvions = value;
+                _listeAvions = value;
                 NotifyPropertyChanged("ListeAvions");
             }
         }
 
-        private ICommand _SubmitCommand;
-
-        public ICommand SubmitCommand
-        {
-            get
-            {
-                if (_SubmitCommand == null)
-                {
-                    _SubmitCommand = new RelayCommand(SubmitExecute, CanSubmitExecute, false);
-                }
-                return _SubmitCommand;
-            }
-        }
-
-        
-
-        private void SubmitExecute(object parameter)
-        {
-            AvionDAL.InsertAvion(NewModele, NewMotorisation, NewCapacite, NewNbPlacesPremium, NewNbPlacesBusiness, NewNbPlacesEco);
-            
-            NewModele = null;
-            NewMotorisation = null;
-            NewCapacite = 0;
-            NewNbPlacesPremium = 0;
-            NewNbPlacesBusiness = 0;
-            NewNbPlacesEco = 0;
-
-            MessageBox.Show("L'avion a bien été crée");
-        }
-
-        private bool CanSubmitExecute(object parameter)
-        {
-            if (string.IsNullOrEmpty(NewModele) || string.IsNullOrEmpty(NewMotorisation) || string.IsNullOrEmpty(NewCapacite.ToString()) || string.IsNullOrEmpty(NewNbPlacesPremium.ToString()) || string.IsNullOrEmpty(NewNbPlacesBusiness.ToString()) || string.IsNullOrEmpty(NewNbPlacesEco.ToString()))
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
+        //Propriétés pour la création d'un avion.
         #region Créer avion
-
         private string _newModele;
         public string NewModele
         {
@@ -191,9 +150,121 @@ namespace AirAtlantique_Csharp.ViewModels
                 }
             }
         }
-
         #endregion
 
+        //Propriétés pour la sélection d'un avion.
+        #region Sélection avion
+        private Avion _avionSelectionne;
+        public Avion AvionSelectionne
+        {
+            get { return this._avionSelectionne; }
+            set {
+                if(this._avionSelectionne != value)
+                {
+                    this._avionSelectionne = value;
+                    this.NotifyPropertyChanged("AvionSelectionne");
+                }
+                
+            }
+        }
+        #endregion
+
+        //Commande pour créer un avion et l'insérer dans la base de données.
+        #region SubmitCommand
+        private ICommand _SubmitCommand;
+
+        public ICommand SubmitCommand
+        {
+            get
+            {
+                if (_SubmitCommand == null)
+                {
+                    _SubmitCommand = new RelayCommand(SubmitExecute, CanSubmitExecute, false);
+                }
+                return _SubmitCommand;
+            }
+        }
+
+
+
+        private void SubmitExecute(object parameter)
+        {
+            AvionDAL.InsertAvion(NewModele, NewMotorisation, NewCapacite, NewNbPlacesPremium, NewNbPlacesBusiness, NewNbPlacesEco);
+
+            NewModele = null;
+            NewMotorisation = null;
+            NewCapacite = 0;
+            NewNbPlacesPremium = 0;
+            NewNbPlacesBusiness = 0;
+            NewNbPlacesEco = 0;
+
+            MessageBox.Show("L'avion a bien été crée");
+        }
+
+        private bool CanSubmitExecute(object parameter)
+        {
+            if (string.IsNullOrEmpty(NewModele) || string.IsNullOrEmpty(NewMotorisation) || string.IsNullOrEmpty(NewCapacite.ToString()) || string.IsNullOrEmpty(NewNbPlacesPremium.ToString()) || string.IsNullOrEmpty(NewNbPlacesBusiness.ToString()) || string.IsNullOrEmpty(NewNbPlacesEco.ToString()))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        #endregion
+
+        //Commande pour supprimer un avion de la base de données.
+        #region DeleteCommand
+        private ICommand _DeleteCommand;
+
+        public ICommand DeleteCommand
+        {
+            get
+            {
+                if (_DeleteCommand == null)
+                {
+                    _DeleteCommand = new RelayCommand(DeleteExecute, CanDeleteExecute, false);
+                }
+                return _DeleteCommand;
+            }
+        }
+
+
+
+        private void DeleteExecute(object parameter)
+        {
+            MessageBoxResult dialogResult = MessageBox.Show("Voulez-vous vraiment supprimer l'avion " + this.AvionSelectionne.IdProperty + " ?", "Confirmation de suppression", MessageBoxButton.YesNo);
+            if (dialogResult == MessageBoxResult.Yes)
+            {
+                //Suppression de l'avion
+                AvionDAL.DeleteAvion(AvionSelectionne.IdProperty);
+            }
+            else if (dialogResult == MessageBoxResult.No)
+            {
+                
+            }
+
+            
+            
+            
+        }
+
+        private bool CanDeleteExecute(object parameter)
+        {
+            if (string.IsNullOrEmpty(this.AvionSelectionne.IdProperty.ToString()) || string.IsNullOrEmpty(this.AvionSelectionne.MotorisationProperty) || string.IsNullOrEmpty(this.AvionSelectionne.CapaciteProperty.ToString()) || string.IsNullOrEmpty(this.AvionSelectionne.NbPlacesPremiumProperty.ToString()) || string.IsNullOrEmpty(this.AvionSelectionne.NbPlacesBusinessProperty.ToString()) || string.IsNullOrEmpty(this.AvionSelectionne.NbPlacesEcoProperty.ToString()))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        #endregion
+
+        //Implémentation de l'interface INotifyPropertyChanged.
+        #region PropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void NotifyPropertyChanged(string propertyName)
@@ -201,9 +272,9 @@ namespace AirAtlantique_Csharp.ViewModels
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-                AvionDAL.UpdateAvion(Avion);
             }
         }
+        #endregion
 
     }
 }

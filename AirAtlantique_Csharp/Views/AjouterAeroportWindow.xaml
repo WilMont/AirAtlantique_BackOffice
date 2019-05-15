@@ -1,0 +1,50 @@
+﻿<Window x:Class="AirAtlantique_Csharp.Views.AjouterAeroportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AirAtlantique_Csharp.Views"
+        mc:Ignorable="d"
+        Title="AjouterAeroportWindow" Height="300" Width="200"
+        xmlns:vm="clr-namespace:AirAtlantique_Csharp.ViewModels"
+        ResizeMode="NoResize">
+    <Window.DataContext>
+        <vm:AeroportViewModel/>
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.Background>
+            <ImageBrush ImageSource="../Images/img_ciel.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
+
+        <!-- Formulaire d'ajout d'un aéroport -->
+        <TextBlock Text="Ajout d'un aéroport" TextDecorations="Underline" FontSize="15" FontWeight="Bold" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="6" Height="30" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+        <TextBlock Text="AITA (3 lettres)" TextDecorations="Underline" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" Height="20" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding NewAita, Mode=TwoWay}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="4" Grid.RowSpan="2" Height="20" Margin="0 0 0 0"/>
+        <TextBlock Text="Pays" TextDecorations="Underline" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="4" Grid.RowSpan="2" Height="20" Margin="0 5 0 0"/>
+        <TextBox Text="{Binding NewPays, Mode=TwoWay}" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="4" Height="20" VerticalAlignment="Bottom"/>
+        <TextBlock Text="Ville" TextDecorations="Underline" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Height="20" Margin="0 10 0 0"/>
+        <TextBox Text="{Binding NewVille, Mode=TwoWay}" Grid.Column="1" Grid.Row="6" Grid.RowSpan="2" Grid.ColumnSpan="4" Height="20" VerticalAlignment="Top"/>
+        <Button Content="Créer" Command="{Binding SubmitCommand}" Click="Btn_Creer" Grid.Column="2" Grid.Row="7" Grid.ColumnSpan="2" Height="20" VerticalAlignment="Bottom"/>
+        
+    </Grid>
+</Window>

@@ -1,0 +1,62 @@
+﻿<Window x:Class="AirAtlantique_Csharp.Views.AjouterVolWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AirAtlantique_Csharp.Views"
+        mc:Ignorable="d"
+        Title="AjouterVolWindow" Height="400" Width="500"
+        xmlns:vm="clr-namespace:AirAtlantique_Csharp.ViewModels">
+    <Window.DataContext>
+        <vm:VolViewModel/>
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.Background>
+            <ImageBrush ImageSource="../Images/img_ciel.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
+
+        <!-- Formulaire d'ajout d'un vol -->
+        <TextBlock Text="Ajout d'un vol" TextDecorations="Underline" FontSize="15" FontWeight="Bold" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="7" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+        <TextBlock Text="Aéroport depart" TextDecorations="Underline" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Height="20" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding NewAeroportDepart, Mode=TwoWay}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Height="20" Margin="0 12 0 0"/>
+        <TextBlock Text="Aéroport arrivée" TextDecorations="Underline" Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="2" Height="20" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding NewAeroportArrivee, Mode=TwoWay}" Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="2" Height="20" Margin="0 12 0 0"/>
+
+        <TextBlock Text="Départ théorique" TextDecorations="Underline" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Height="20" VerticalAlignment="Top"/>
+        <DatePicker Text="{Binding NewDepartTheorique, Mode=TwoWay}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Height="20" Margin="0 12 0 0"/>
+        <TextBlock Text="Arrivée théorique" TextDecorations="Underline" Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="2" Height="20" VerticalAlignment="Top"/>
+        <DatePicker Text="{Binding NewArriveeTheorique, Mode=TwoWay}" Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="2" Height="20" Margin="0 12 0 0"/>
+        
+        <TextBlock Text="Prix Eco" TextDecorations="Underline" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="4" Height="20" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding NewPrixEco, Mode=TwoWay}" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="1" Height="20" Margin="0 12 0 0"/>
+        <TextBlock Text="Prix Business" TextDecorations="Underline" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="1" Height="20" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding NewPrixBusiness, Mode=TwoWay}" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="1" Height="20" Margin="0 12 0 0"/>
+        <TextBlock Text="Prix Premium" TextDecorations="Underline" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="1" Height="20" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding NewPrixPremium, Mode=TwoWay}" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="1" Height="20" Margin="0 12 0 0"/>
+        <TextBlock Text="Avion" TextDecorations="Underline" Grid.Column="3" Grid.Row="5" Grid.ColumnSpan="1" Height="20" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding NewNbPlacesEco, Mode=TwoWay}" Grid.Column="3" Grid.Row="5" Grid.ColumnSpan="1" Height="20" Margin="0 12 0 0"/>
+        
+        <Button Content="Créer" Command="{Binding SubmitCommand}" Grid.Row="7" Grid.ColumnSpan="7" Height="20" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+    </Grid>
+</Window>

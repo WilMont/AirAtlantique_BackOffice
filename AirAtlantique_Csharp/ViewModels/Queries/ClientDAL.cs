@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace AirAtlantique_Csharp.ViewModels.Queries
 {
-    class ClientDAL
+    public class ClientDAL
     {
         private static MySqlConnection connection = BDD_connexion.GetConnection();
 
-        public void SelectClients(ObservableCollection<Client> ObsColClient)
+        public static void SelectClient(ObservableCollection<Client> ObsColClient)
         {
             connection.Close();
             connection.Open();
@@ -31,7 +31,7 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
             connection.Close();
         }
 
-        public void SelectClient(ObservableCollection<Client> l, int id)
+        public static void SelectCertainClient(ObservableCollection<Client> l, int id)
         {
             connection.Close();
             connection.Open();
@@ -67,6 +67,25 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
 
             cmd.ExecuteNonQuery();
             connection.Close();
+        }
+
+        public static int GetLastId()
+        {
+            int lastId = new int();
+
+            connection.Open();
+            string query = "SELECT id FROM client ORDER BY id DESC limit 1";
+            MySqlCommand cmd = new MySqlCommand(query, connection);
+            cmd.ExecuteNonQuery();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                lastId = Convert.ToInt32(reader["id"]);
+            }
+            reader.Close();
+            connection.Close();
+
+            return lastId;
         }
 
     }
