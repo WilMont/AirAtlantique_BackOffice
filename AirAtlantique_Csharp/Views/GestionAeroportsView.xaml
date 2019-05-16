@@ -40,7 +40,7 @@
         <!-- Grille d'affichage des aéroports -->
         <TextBlock Text="Liste des aéroports" TextDecorations="Underline" FontSize="15" FontWeight="Bold" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="5" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
 
-        <DataGrid Name="DataGridListeAéroports" ItemsSource="{Binding ListeAeroports}" AutoGenerateColumns="False" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="5" Grid.RowSpan="6" SelectedItem="{Binding AvionSelectionne}" SelectionMode="Single">
+        <DataGrid Name="DataGridListeAéroports" ItemsSource="{Binding ListeAeroports}" AutoGenerateColumns="False" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="5" Grid.RowSpan="6" SelectedItem="{Binding AeroportSelectionne}" SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID Aéroport" Binding="{Binding IdProperty, Mode=OneWay}" ></DataGridTextColumn>
                 <DataGridTextColumn Header="AITA" Binding="{Binding AitaProperty, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></DataGridTextColumn>

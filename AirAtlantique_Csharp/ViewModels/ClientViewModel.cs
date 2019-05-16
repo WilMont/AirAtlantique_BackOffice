@@ -65,92 +65,7 @@ namespace AirAtlantique_Csharp.ViewModels
             }
         }
 
-        //Propriétés pour la création d'un client.
-        /*#region Créer Client
-        private string _newModele;
-        public string NewModele
-        {
-            get { return this._newModele; }
-            set
-            {
-                if (this._newModele != value)
-                {
-                    this._newModele = value;
-                    this.NotifyPropertyChanged("NewModele");
-                }
-            }
-        }
-
-        private string _newMotorisation;
-        public string NewMotorisation
-        {
-            get { return this._newMotorisation; }
-            set
-            {
-                if (this._newMotorisation != value)
-                {
-                    this._newMotorisation = value;
-                    this.NotifyPropertyChanged("NewMotorisation");
-                }
-            }
-        }
-
-        private int _newCapacite;
-        public int NewCapacite
-        {
-            get { return this._newCapacite; }
-            set
-            {
-                if (this._newCapacite != value)
-                {
-                    this._newCapacite = value;
-                    this.NotifyPropertyChanged("NewCapacite");
-                }
-            }
-        }
-
-        private int _newNbPlacesPremium;
-        public int NewNbPlacesPremium
-        {
-            get { return this._newNbPlacesPremium; }
-            set
-            {
-                if (this._newNbPlacesPremium != value)
-                {
-                    this._newNbPlacesPremium = value;
-                    this.NotifyPropertyChanged("NewNbPlacesPremium");
-                }
-            }
-        }
-
-        private int _newNbPlacesBusiness;
-        public int NewNbPlacesBusiness
-        {
-            get { return this._newNbPlacesBusiness; }
-            set
-            {
-                if (this._newNbPlacesBusiness != value)
-                {
-                    this._newNbPlacesBusiness = value;
-                    this.NotifyPropertyChanged("NewNbPlacesBusiness");
-                }
-            }
-        }
-
-        private int _newNbPlacesEco;
-        public int NewNbPlacesEco
-        {
-            get { return this._newNbPlacesEco; }
-            set
-            {
-                if (this._newNbPlacesEco != value)
-                {
-                    this._newNbPlacesEco = value;
-                    this.NotifyPropertyChanged("NewNbPlacesEco");
-                }
-            }
-        }
-        #endregion */
+        
 
         //Propriétés pour la sélection d'un client.
         #region Sélection client
@@ -170,50 +85,7 @@ namespace AirAtlantique_Csharp.ViewModels
         }
         #endregion
 
-        //Commande pour créer un client et l'insérer dans la base de données.
-        /*#region SubmitCommand
-        private ICommand _SubmitCommand;
-
-        public ICommand SubmitCommand
-        {
-            get
-            {
-                if (_SubmitCommand == null)
-                {
-                    _SubmitCommand = new RelayCommand(SubmitExecute, CanSubmitExecute, false);
-                }
-                return _SubmitCommand;
-            }
-        }
-
-
-
-        private void SubmitExecute(object parameter)
-        {
-            ClientDAL.InsertClient(NewModele, NewMotorisation, NewCapacite, NewNbPlacesPremium, NewNbPlacesBusiness, NewNbPlacesEco);
-
-            NewModele = null;
-            NewMotorisation = null;
-            NewCapacite = 0;
-            NewNbPlacesPremium = 0;
-            NewNbPlacesBusiness = 0;
-            NewNbPlacesEco = 0;
-
-            MessageBox.Show("Le client a bien été crée");
-        }
-
-        private bool CanSubmitExecute(object parameter)
-        {
-            if (string.IsNullOrEmpty(NewModele) || string.IsNullOrEmpty(NewMotorisation) || string.IsNullOrEmpty(NewCapacite.ToString()) || string.IsNullOrEmpty(NewNbPlacesPremium.ToString()) || string.IsNullOrEmpty(NewNbPlacesBusiness.ToString()) || string.IsNullOrEmpty(NewNbPlacesEco.ToString()))
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-        #endregion */
+        
 
         //Commande pour supprimer un client de la base de données.
         /*#region DeleteCommand

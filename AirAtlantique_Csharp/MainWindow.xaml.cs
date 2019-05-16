@@ -57,12 +57,19 @@ namespace AirAtlantique_Csharp
             BtnGestionDesVols.Background = Brushes.Azure;
         }
 
-        private void BtnGestionDesClients_Click(object sender, RoutedEventArgs e)
+        private void BtnGestionDesUtilisateurs_Click(object sender, RoutedEventArgs e)
+        {
+            ContenuPage.Content = new GestionUtilisateursView();
+            RAZDesCouleursBoutons();
+            BtnGestionDesVols.Background = Brushes.Azure;
+        }
+
+        /*private void BtnGestionDesClients_Click(object sender, RoutedEventArgs e)
         {
             ContenuPage.Content = new GestionClientsView();
             RAZDesCouleursBoutons();
             BtnGestionDesClients.Background = Brushes.Azure;
-        }
+        } */
         #endregion
 
         #region FONCTIONS_DIVERSES
@@ -73,7 +80,8 @@ namespace AirAtlantique_Csharp
             BtnGestionDesAvions.Background = Brushes.White;
             BtnGestionDesAeroports.Background = Brushes.White;
             BtnGestionDesVols.Background = Brushes.White;
-            BtnGestionDesClients.Background = Brushes.White;
+            BtnGestionDesUtilisateurs.Background = Brushes.White;
+            //BtnGestionDesClients.Background = Brushes.White;
         }
 
         #endregion

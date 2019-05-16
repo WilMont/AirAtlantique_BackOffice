@@ -39,7 +39,7 @@
         <!-- Grille d'affichage des avions -->
         <TextBlock Text="Liste des avions" TextDecorations="Underline" FontSize="15" FontWeight="Bold" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="5" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
 
-        <DataGrid Name="DataGridListeAvions" ItemsSource="{Binding ListeClients}" AutoGenerateColumns="False" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="5" Grid.RowSpan="6" SelectedItem="{Binding AvionSelectionne}" SelectionMode="Single">
+        <DataGrid Name="DataGridListeAvions" ItemsSource="{Binding ListeClients}" AutoGenerateColumns="False" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="5" Grid.RowSpan="6" SelectedItem="{Binding ClientSelectionne}" SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID Client" Binding="{Binding IdProperty, Mode=OneWay}" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Nom" Binding="{Binding NomProperty, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></DataGridTextColumn>
@@ -51,9 +51,9 @@
                 <DataGridTextColumn Header="Adresse" Binding="{Binding AdresseProperty, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></DataGridTextColumn>
 
             </DataGrid.Columns>
-            <DataGrid.InputBindings>
+            <!-- <DataGrid.InputBindings>
                 <MouseBinding Gesture="RightClick" Command="{Binding DeleteCommand}" />
-            </DataGrid.InputBindings>
+            </DataGrid.InputBindings> -->
         </DataGrid>
 
 

@@ -71,7 +71,7 @@ namespace AirAtlantique_Csharp.Models
         private DateTime _dateNaissanceProperty;
         public DateTime DateNaissanceProperty
         {
-            get { return _dateNaissanceProperty.Date; }
+            get { return _dateNaissanceProperty; }
             set { this._dateNaissanceProperty = value; OnPropertyChanged("DateNaissanceProperty"); }
         }
 

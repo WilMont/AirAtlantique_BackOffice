@@ -36,7 +36,7 @@
         <Button x:Name="BtnGestionDesAvions" Background="White" Grid.Column="1" Grid.ColumnSpan="1" Grid.RowSpan="1" Click="BtnGestionDesAvions_Click">Avions</Button>
         <Button x:Name="BtnGestionDesAeroports" Background="White" Grid.Column="2" Grid.ColumnSpan="1" Grid.RowSpan="1" Click="BtnGestionDesAeroports_Click">Aéroports</Button>
         <Button x:Name="BtnGestionDesVols" Background="White" Grid.Column="3" Grid.ColumnSpan="1" Grid.RowSpan="1" Click="BtnGestionDesVols_Click">Vols</Button>
-        <Button x:Name="BtnGestionDesClients" Background="White" Grid.Column="4" Grid.ColumnSpan="1" Grid.RowSpan="1" Click="BtnGestionDesClients_Click">Clients</Button>
+        <Button x:Name="BtnGestionDesUtilisateurs" Background="White" Grid.Column="4" Grid.ColumnSpan="1" Grid.RowSpan="1" Click="BtnGestionDesUtilisateurs_Click">Utilisateurs</Button>
         
 
 
