@@ -14,6 +14,7 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
         private static BDD_connexion bddConnection = new BDD_connexion();
         private static MySqlConnection connection = bddConnection.Connection;
 
+        //Requête SQL pour sélectionner tous les aéroports dans la base de données.
         public static void SelectAeroport(ObservableCollection<Aeroport> ObsColAeroport)
         {
             connection.Close();
@@ -30,6 +31,7 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
             connection.Close();
         }
 
+        //Requête SQL pour mettre à jour un aéroport dans la base de données.
         public static void UpdateAeroport(Aeroport aero)
         {
             connection.Open();
@@ -40,6 +42,7 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
             connection.Close();
         }
 
+        //Requête SQL pour insérer un nouvel aéroport dans la base de données.
         public static void InsertAeroport(string aita, string pays, string ville)
         {
             connection.Open();
@@ -52,6 +55,7 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
             connection.Close();
         }
 
+        //Requête SQL pour supprimer un aéroport de la base de données.
         public static void DeleteAeroport(int id)
         {
             connection.Open();
@@ -67,6 +71,7 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
             connection.Close();
         }
 
+        //Requête SQL pour récupérer l'id du dernier aéroport dans la base de données.
         public static int GetLastId()
         {
             int lastId = new int();

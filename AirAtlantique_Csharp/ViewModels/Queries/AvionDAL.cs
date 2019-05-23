@@ -15,6 +15,7 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
         private static BDD_connexion bddConnection = new BDD_connexion();
         private static MySqlConnection connection = bddConnection.Connection;
 
+        //Requête SQL pour sélectionner tous les avions dans la base de données.
         public static void SelectAvion(ObservableCollection<Avion> ObsColAvion)
         {
             connection.Close();
@@ -31,6 +32,7 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
             connection.Close();
         }
 
+        //Requête SQL pour mettre à jour un avion dans la base de données.
         public static void UpdateAvion(Avion a)
         {
             connection.Open();
@@ -41,6 +43,7 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
             connection.Close();
         }
 
+        //Requête SQL pour insérer un nouvel avion dans la base de données.
         public static void InsertAvion(string mo, string moto, int capa, int prem, int busi, int eco)
         {
             connection.Open();
@@ -56,6 +59,7 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
             connection.Close();
         }
 
+        //Requête SQL pour supprimer un avion dans la base de données (On supprime aussi les vols et les billets liés à l'avion).
         public static void DeleteAvion(int id)
         {
             connection.Open();
@@ -76,6 +80,7 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
             connection.Close();
         }
 
+        //Requête SQL pour récupérer l'id du dernier avion dans la base de données.
         public static int GetLastId()
         {
             int lastId = new int();

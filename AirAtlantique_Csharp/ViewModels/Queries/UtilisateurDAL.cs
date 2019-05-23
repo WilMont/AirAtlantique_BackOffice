@@ -14,6 +14,7 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
         private static BDD_connexion bddConnection = new BDD_connexion();
         private static MySqlConnection connection = bddConnection.Connection;
 
+        //Requête SQL pour sélectionner tous les utilisateurs dans la base de données.
         public static void SelectUtilisateur(ObservableCollection<Utilisateur> ObsColUtilisateur)
         {
             connection.Close();
@@ -32,25 +33,7 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
             connection.Close();
         }
 
-        public static void SelectCertainUtilisateur(ObservableCollection<Utilisateur> ObsColUtilisateur, int id)
-        {
-            connection.Close();
-            connection.Open();
-
-            string query = "SELECT u.id,u.username,u.password,u.email,u.nom,u.prenom,u.date_naissance,u.pays,u.adresse,u.ville,u.code_postal,u.numero_telephone FROM utilisateur u WHERE u.id = @id Group BY u.id";
-            MySqlCommand cmd = new MySqlCommand(query, connection);
-            cmd.Parameters.AddWithValue("@id", id);
-            MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                Utilisateur u = new Utilisateur(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetDateTime(6), reader.GetString(7), reader.GetString(8), reader.GetString(9), reader.GetString(10), reader.GetString(11));
-                ObsColUtilisateur.Add(u);
-            }
-            reader.Close();
-
-            connection.Close();
-        }
-
+        //Requête SQL pour mettre à jour un utilisateur dans la base de données.
         public static void UpdateUtilisateur(Utilisateur u)
         {
             connection.Open();
@@ -74,16 +57,23 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
             connection.Close();
         }
 
+        //Requête SQL pour supprimer un utilisateur de la base de données (Si des billets sont au nom de l'utilisateur on les supprime aussi).
         public static void DeleteUtilisateur(int id)
         {
             connection.Open();
-            string query = "DELETE FROM utilisateur WHERE id = @id";
-            MySqlCommand cmd = new MySqlCommand(query, connection);
+            string queryBillet = "DELETE FROM billet WHERE utilisateur_id = @id";
+            MySqlCommand cmdBillet = new MySqlCommand(queryBillet, connection);
+            cmdBillet.Parameters.AddWithValue("@id", id);
+            cmdBillet.ExecuteNonQuery();
+
+            string queryUtilisateur = "DELETE FROM utilisateur WHERE id = @id";
+            MySqlCommand cmd = new MySqlCommand(queryUtilisateur, connection);
             cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();
             connection.Close();
         }
 
+        //Requête SQL pour récuperer l'id du dernier utilisateur dans la base de données.
         public static int GetLastId()
         {
             int lastId = new int();

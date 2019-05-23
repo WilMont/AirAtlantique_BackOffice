@@ -18,6 +18,7 @@ namespace AirAtlantique_Csharp.ViewModels
 
         public AvionViewModel()
         {
+            //On tente une connexion à la base de données, sinon on retourne un message d'erreur.
             try
             {
                 int lastId = lastId = AvionDAL.GetLastId();
@@ -186,7 +187,7 @@ namespace AirAtlantique_Csharp.ViewModels
         }
 
 
-
+        //Ce qui est exécuté selon si la condition est vraie ou fausse.
         private void SubmitExecute(object parameter)
         {
             AvionDAL.InsertAvion(NewModele, NewMotorisation, NewCapacite, NewNbPlacesPremium, NewNbPlacesBusiness, NewNbPlacesEco);
@@ -195,6 +196,7 @@ namespace AirAtlantique_Csharp.ViewModels
             MessageBox.Show("L'avion a bien été crée");
         }
 
+        //La condition pour exécuter.
         private bool CanSubmitExecute(object parameter)
         {
             if (string.IsNullOrEmpty(NewModele) || string.IsNullOrEmpty(NewMotorisation) || string.IsNullOrEmpty(NewCapacite.ToString()) || string.IsNullOrEmpty(NewNbPlacesPremium.ToString()) || string.IsNullOrEmpty(NewNbPlacesBusiness.ToString()) || string.IsNullOrEmpty(NewNbPlacesEco.ToString()))
@@ -225,7 +227,7 @@ namespace AirAtlantique_Csharp.ViewModels
         }
 
 
-
+        //Ce qui est exécuté selon si la condition est vraie ou fausse.
         private void DeleteExecute(object parameter)
         {
             MessageBoxResult dialogResult = MessageBox.Show("Voulez-vous vraiment supprimer l'avion " + this.AvionSelectionne.IdProperty + " ?", "Confirmation de suppression", MessageBoxButton.YesNo);
@@ -246,6 +248,7 @@ namespace AirAtlantique_Csharp.ViewModels
             
         }
 
+        //La condition pour exécuter.
         private bool CanDeleteExecute(object parameter)
         {
             try { 

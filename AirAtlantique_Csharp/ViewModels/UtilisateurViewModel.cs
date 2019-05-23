@@ -18,6 +18,7 @@ namespace AirAtlantique_Csharp.ViewModels
 
         public UtilisateurViewModel()
         {
+            //On tente une connexion à la base de données, sinon on retourne un message d'erreur.
             try
             {
                 int lastId = lastId = UtilisateurDAL.GetLastId();
@@ -83,7 +84,7 @@ namespace AirAtlantique_Csharp.ViewModels
         }
         #endregion
 
-        //Commande pour supprimer un avion de la base de données.
+        //Commande pour supprimer un utilisateur de la base de données.
         #region DeleteCommand
         private ICommand _DeleteCommand;
 
@@ -100,14 +101,14 @@ namespace AirAtlantique_Csharp.ViewModels
         }
 
 
-
+        //Ce qui est exécuté selon si la condition est vraie ou fausse.
         private void DeleteExecute(object parameter)
         {
             MessageBoxResult dialogResult = MessageBox.Show("Voulez-vous vraiment supprimer l'utilisateur " + this.UtilisateurSelectionne.IdProperty + " ?", "Confirmation de suppression", MessageBoxButton.YesNo);
             if (dialogResult == MessageBoxResult.Yes)
             {
-                //Suppression de l'avion
-                AvionDAL.DeleteAvion(UtilisateurSelectionne.IdProperty);
+                //Suppression de l'utilisateur
+                UtilisateurDAL.DeleteUtilisateur(UtilisateurSelectionne.IdProperty);
                 MessageBox.Show("L'utilisateur a bien été supprimé.");
 
             }
@@ -121,6 +122,7 @@ namespace AirAtlantique_Csharp.ViewModels
 
         }
 
+        //La condition pour exécuter.
         private bool CanDeleteExecute(object parameter)
         {
             try

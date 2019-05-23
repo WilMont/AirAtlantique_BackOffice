@@ -14,6 +14,7 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
         private static BDD_connexion bddConnection = new BDD_connexion();
         private static MySqlConnection connection = bddConnection.Connection;
 
+        //Requête SQL pour sélectionner tous les vols dans la base de données.
         public static void SelectVol(ObservableCollection<Vol> ObsColVol)
         {
             connection.Close();
@@ -32,25 +33,8 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
             connection.Close();
         }
 
-        public static void SelectCertainVol(ObservableCollection<Vol> ObsColVol, int id)
-        {
-            connection.Close();
-            connection.Open();
 
-            string query = "SELECT v.id, v.aeroport_depart_id, v.aeroport_arrivee_id, v.avion_id, v.depart_theorique, v.depart_reel, v.arrivee_theorique, v.arrivee_reelle, v.prix_eco, v.prix_business, v.prix_premium FROM vol v Where v.id = @id Group BY v.id";
-            MySqlCommand cmd = new MySqlCommand(query, connection);
-            cmd.Parameters.AddWithValue("@id", id);
-            MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                Vol v = new Vol(reader.GetInt32(0), reader.GetInt32(1), reader.GetInt32(2), reader.GetInt32(3), reader.GetDateTime(4), reader.GetDateTime(5), reader.GetDateTime(6), reader.GetDateTime(7), reader.GetDecimal(8), reader.GetDecimal(9), reader.GetDecimal(10));
-                ObsColVol.Add(v);
-            }
-            reader.Close();
-
-            connection.Close();
-        }
-
+        //Requête SQL pour mettre à jour un vol dans la base de données.
         public static void UpdateVol(Vol v)
         {
             connection.Open();
@@ -73,6 +57,7 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
             connection.Close();
         }
 
+        //Requête SQL pour insérer un nouveau vol dans la base de données.
         public static void InsertVol(int aeroportDepart, int aeroportArrivee, int avion, DateTime departTheorique, DateTime departReel, DateTime arriveeTheorique, DateTime arriveeReelle, Decimal prixEco, Decimal prixBusiness, Decimal prixPremium)
         {
             connection.Open();
@@ -92,6 +77,7 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
             connection.Close();
         }
 
+        //Requête SQL pour supprimer un vol de la base de données (On supprime aussi les bilets liés au vol).
         public static void DeleteVol(int id)
         {
             connection.Open();
@@ -107,6 +93,7 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
             connection.Close();
         }
 
+        //Requête SQL pour récupérer l'id du dernier vol dans la base de données.
         public static int GetLastId()
         {
             int lastId = new int();

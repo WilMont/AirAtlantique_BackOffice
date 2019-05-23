@@ -18,6 +18,7 @@ namespace AirAtlantique_Csharp.ViewModels
 
         public VolViewModel()
         {
+            //On tente une connexion à la base de données, sinon on retourne un message d'erreur.
             try
             {
                 int lastId = lastId = VolDAL.GetLastId();
@@ -326,8 +327,7 @@ namespace AirAtlantique_Csharp.ViewModels
             }
         }
 
-
-
+        //Ce qui est exécuté selon si la condition est vraie ou fausse.
         private void SubmitExecute(object parameter)
         {
             VolDAL.InsertVol(NewAeroportDepart, NewAeroportArrivee, NewAvion, NewDepartTheorique, NewDepartReel, NewArriveeTheorique, NewArriveeReelle, NewPrixEco, NewPrixBusiness, NewPrixPremium);
@@ -335,6 +335,7 @@ namespace AirAtlantique_Csharp.ViewModels
             MessageBox.Show("Le vol a bien été crée");
         }
 
+        //La condition pour exécuter.
         private bool CanSubmitExecute(object parameter)
         {
             if ((NewAeroportDepart == 0) || (NewAeroportArrivee == 0) || (NewAeroportDepart == NewAeroportArrivee) || (NewDepartTheorique > NewArriveeTheorique) || (NewDepartTheorique == NewArriveeTheorique) ||  string.IsNullOrEmpty(NewDepartTheorique.ToString()) || string.IsNullOrEmpty(NewArriveeTheorique.ToString()) || string.IsNullOrEmpty(NewPrixEco.ToString()) || string.IsNullOrEmpty(NewPrixBusiness.ToString()) || string.IsNullOrEmpty(NewPrixPremium.ToString()) || string.IsNullOrEmpty(NewAvion.ToString()))
@@ -365,7 +366,7 @@ namespace AirAtlantique_Csharp.ViewModels
         }
 
 
-
+        //Ce qui est exécuté selon si la condition est vraie ou fausse.
         private void DeleteExecute(object parameter)
         {
             MessageBoxResult dialogResult = MessageBox.Show("Voulez-vous vraiment supprimer le vol " + this.VolSelectionne.IdProperty + " ?", "Confirmation de suppression", MessageBoxButton.YesNo);
@@ -386,6 +387,7 @@ namespace AirAtlantique_Csharp.ViewModels
 
         }
 
+        //La condition pour exécuter.
         private bool CanDeleteExecute(object parameter)
         {
             try

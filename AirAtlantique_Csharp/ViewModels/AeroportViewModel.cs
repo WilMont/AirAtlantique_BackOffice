@@ -18,6 +18,7 @@ namespace AirAtlantique_Csharp.ViewModels
 
         public AeroportViewModel()
         {
+            //On tente une connexion à la base de données, sinon on retourne un message d'erreur.
             try
             {
                 int lastId = lastId = AeroportDAL.GetLastId();
@@ -145,7 +146,7 @@ namespace AirAtlantique_Csharp.ViewModels
         }
 
 
-
+        //Ce qui est exécuté selon si la condition est vraie ou fausse.
         private void SubmitExecute(object parameter)
         {
             AeroportDAL.InsertAeroport(NewAita, NewPays, NewVille);
@@ -157,6 +158,7 @@ namespace AirAtlantique_Csharp.ViewModels
             MessageBox.Show("L'aéroport a bien été crée");
         }
 
+        //La condition pour exécuter.
         private bool CanSubmitExecute(object parameter)
         {
             if (string.IsNullOrEmpty(NewAita) || (NewAita.Length != 3) || string.IsNullOrEmpty(NewPays) || string.IsNullOrEmpty(NewVille))
@@ -187,7 +189,7 @@ namespace AirAtlantique_Csharp.ViewModels
         }
 
 
-
+        //Ce qui est exécuté selon si la condition est vraie ou fausse.
         private void DeleteExecute(object parameter)
         {
             MessageBoxResult dialogResult = MessageBox.Show("Voulez-vous vraiment supprimer l'aéroport " + this.AeroportSelectionne.IdProperty + " ?", "Confirmation de suppression", MessageBoxButton.YesNo);
@@ -208,6 +210,7 @@ namespace AirAtlantique_Csharp.ViewModels
 
         }
 
+        //La condition pour exécuter.
         private bool CanDeleteExecute(object parameter)
         {
             try { 
