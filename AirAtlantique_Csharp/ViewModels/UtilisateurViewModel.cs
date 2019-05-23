@@ -1,4 +1,5 @@
-﻿using AirAtlantique_Csharp.Models;
+﻿using AirAtlantique_Csharp.Command;
+using AirAtlantique_Csharp.Models;
 using AirAtlantique_Csharp.ViewModels.Queries;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace AirAtlantique_Csharp.ViewModels
 {
@@ -77,6 +79,65 @@ namespace AirAtlantique_Csharp.ViewModels
                     this.NotifyPropertyChanged("UtilisateurSelectionne");
                 }
 
+            }
+        }
+        #endregion
+
+        //Commande pour supprimer un avion de la base de données.
+        #region DeleteCommand
+        private ICommand _DeleteCommand;
+
+        public ICommand DeleteCommand
+        {
+            get
+            {
+                if (_DeleteCommand == null)
+                {
+                    _DeleteCommand = new RelayCommand(DeleteExecute, CanDeleteExecute, false);
+                }
+                return _DeleteCommand;
+            }
+        }
+
+
+
+        private void DeleteExecute(object parameter)
+        {
+            MessageBoxResult dialogResult = MessageBox.Show("Voulez-vous vraiment supprimer l'utilisateur " + this.UtilisateurSelectionne.IdProperty + " ?", "Confirmation de suppression", MessageBoxButton.YesNo);
+            if (dialogResult == MessageBoxResult.Yes)
+            {
+                //Suppression de l'avion
+                AvionDAL.DeleteAvion(UtilisateurSelectionne.IdProperty);
+                MessageBox.Show("L'utilisateur a bien été supprimé.");
+
+            }
+            else if (dialogResult == MessageBoxResult.No)
+            {
+
+            }
+
+
+
+
+        }
+
+        private bool CanDeleteExecute(object parameter)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(this.UtilisateurSelectionne.IdProperty.ToString()))
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Pour supprimer un utilisateur, vous devez en sélectionner un.");
+                return false;
             }
         }
         #endregion

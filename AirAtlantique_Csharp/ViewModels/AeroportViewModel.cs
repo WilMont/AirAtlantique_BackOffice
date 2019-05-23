@@ -190,11 +190,13 @@ namespace AirAtlantique_Csharp.ViewModels
 
         private void DeleteExecute(object parameter)
         {
-            MessageBoxResult dialogResult = MessageBox.Show("Voulez-vous vraiment supprimer l'aéroport " + this.Aeroport.IdProperty + " ?", "Confirmation de suppression", MessageBoxButton.YesNo);
+            MessageBoxResult dialogResult = MessageBox.Show("Voulez-vous vraiment supprimer l'aéroport " + this.AeroportSelectionne.IdProperty + " ?", "Confirmation de suppression", MessageBoxButton.YesNo);
             if (dialogResult == MessageBoxResult.Yes)
             {
                 //Suppression de l'aéroport
                 AeroportDAL.DeleteAeroport(AeroportSelectionne.IdProperty);
+                MessageBox.Show("L'aéroport a bien été supprimé.");
+
             }
             else if (dialogResult == MessageBoxResult.No)
             {
@@ -208,13 +210,20 @@ namespace AirAtlantique_Csharp.ViewModels
 
         private bool CanDeleteExecute(object parameter)
         {
-            if (string.IsNullOrEmpty(this.Aeroport.IdProperty.ToString()) || string.IsNullOrEmpty(this.Aeroport.AitaProperty) || string.IsNullOrEmpty(this.Aeroport.PaysProperty) || string.IsNullOrEmpty(this.Aeroport.VilleProperty))
+            try { 
+            if (string.IsNullOrEmpty(this.AeroportSelectionne.IdProperty.ToString()) || string.IsNullOrEmpty(this.AeroportSelectionne.AitaProperty) || string.IsNullOrEmpty(this.AeroportSelectionne.PaysProperty) || string.IsNullOrEmpty(this.AeroportSelectionne.VilleProperty))
             {
                 return false;
             }
             else
             {
                 return true;
+            }
+            }
+            catch
+            {
+                MessageBox.Show("Pour supprimer un aéroport, vous devez en sélectionner un.");
+                return false;
             }
         }
         #endregion

@@ -38,14 +38,16 @@
         <!-- Formulaire d'ajout d'un vol -->
         <TextBlock Text="Ajout d'un vol" TextDecorations="Underline" FontSize="15" FontWeight="Bold" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="7" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
         <TextBlock Text="Aéroport depart" TextDecorations="Underline" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Height="20" VerticalAlignment="Top"/>
-        <TextBox Text="{Binding NewAeroportDepart, Mode=TwoWay}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Height="20" Margin="0 12 0 0"/>
+        <ComboBox ItemsSource="{Binding ListeAeroportsDepart}" Text="{Binding NewAeroportDepart, Mode=TwoWay}" DisplayMemberPath="IdProperty" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" Height="20" Margin="0 12 0 0"/>
+
         <TextBlock Text="Aéroport arrivée" TextDecorations="Underline" Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="2" Height="20" VerticalAlignment="Top"/>
-        <TextBox Text="{Binding NewAeroportArrivee, Mode=TwoWay}" Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="2" Height="20" Margin="0 12 0 0"/>
+        <ComboBox ItemsSource="{Binding ListeAeroportsArrivee}" Text="{Binding NewAeroportArrivee, Mode=TwoWay}" DisplayMemberPath="IdProperty" Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="1" Height="20" Margin="0 12 0 0"/>
+
 
         <TextBlock Text="Départ théorique" TextDecorations="Underline" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Height="20" VerticalAlignment="Top"/>
-        <DatePicker Text="{Binding NewDepartTheorique, Mode=TwoWay}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Height="20" Margin="0 12 0 0"/>
+        <TextBox Text="{Binding NewDepartTheorique, StringFormat='dd/MM/yyyy HH:mm:ss', Mode=TwoWay}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Height="20" Margin="0 12 0 0"/>
         <TextBlock Text="Arrivée théorique" TextDecorations="Underline" Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="2" Height="20" VerticalAlignment="Top"/>
-        <DatePicker Text="{Binding NewArriveeTheorique, Mode=TwoWay}" Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="2" Height="20" Margin="0 12 0 0"/>
+        <TextBox Text="{Binding NewArriveeTheorique, StringFormat='dd/MM/yyyy HH:mm:ss', Mode=TwoWay}" Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="2" Height="20" Margin="0 12 0 0"/>
         
         <TextBlock Text="Prix Eco" TextDecorations="Underline" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="4" Height="20" VerticalAlignment="Top"/>
         <TextBox Text="{Binding NewPrixEco, Mode=TwoWay}" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="1" Height="20" Margin="0 12 0 0"/>
@@ -54,9 +56,9 @@
         <TextBlock Text="Prix Premium" TextDecorations="Underline" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="1" Height="20" VerticalAlignment="Top"/>
         <TextBox Text="{Binding NewPrixPremium, Mode=TwoWay}" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="1" Height="20" Margin="0 12 0 0"/>
         <TextBlock Text="Avion" TextDecorations="Underline" Grid.Column="3" Grid.Row="5" Grid.ColumnSpan="1" Height="20" VerticalAlignment="Top"/>
-        <TextBox Text="{Binding NewNbPlacesEco, Mode=TwoWay}" Grid.Column="3" Grid.Row="5" Grid.ColumnSpan="1" Height="20" Margin="0 12 0 0"/>
-        
-        <Button Content="Créer" Command="{Binding SubmitCommand}" Grid.Row="7" Grid.ColumnSpan="7" Height="20" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <ComboBox ItemsSource="{Binding ListeAvions}" Text="{Binding NewAvion, Mode=TwoWay}" DisplayMemberPath="IdProperty" Grid.Column="3" Grid.Row="5" Grid.ColumnSpan="1" Height="20" Margin="0 12 0 0"/>
+
+        <Button Content="Créer" Command="{Binding SubmitCommand}" Click="Btn_Creer" Grid.Row="7" Grid.ColumnSpan="7" Height="20" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
     </Grid>
 </Window>

@@ -11,14 +11,15 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
 {
     public class VolDAL
     {
-        private static MySqlConnection connection = BDD_connexion.GetConnection();
+        private static BDD_connexion bddConnection = new BDD_connexion();
+        private static MySqlConnection connection = bddConnection.Connection;
 
         public static void SelectVol(ObservableCollection<Vol> ObsColVol)
         {
             connection.Close();
             connection.Open();
 
-            string query = "SELECT v.id, v.aeroportDepart, v.aeroportArrivee, v.avion, v.departTheorique, v.departReel, v.arriveeTheorique, v.arriveeReelle, v.prixEco, v.prixBusiness, v.prixPremium FROM vol v Group BY v.id";
+            string query = "SELECT v.id,v.aeroport_depart_id,v.aeroport_arrivee_id,v.avion_id,v.depart_theorique,v.depart_reel,v.arrivee_theorique,v.arrivee_reelle,v.prix_eco,v.prix_business,v.prix_premium FROM vol v Group BY v.id";
             MySqlCommand cmd = new MySqlCommand(query, connection);
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
@@ -36,7 +37,7 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
             connection.Close();
             connection.Open();
 
-            string query = "SELECT v.id, v.aeroportDepart, v.aeroportArrivee, v.avion, v.departTheorique, v.departReel, v.arriveeTheorique, v.arriveeReelle, v.prixEco, v.prixBusiness, v.prixPremium FROM vol v Where v.id = @id Group BY v.id";
+            string query = "SELECT v.id, v.aeroport_depart_id, v.aeroport_arrivee_id, v.avion_id, v.depart_theorique, v.depart_reel, v.arrivee_theorique, v.arrivee_reelle, v.prix_eco, v.prix_business, v.prix_premium FROM vol v Where v.id = @id Group BY v.id";
             MySqlCommand cmd = new MySqlCommand(query, connection);
             cmd.Parameters.AddWithValue("@id", id);
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -54,7 +55,7 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
         {
             connection.Open();
 
-            string query = "UPDATE vol SET aeroportDepart=@aeDep,aeroportArrivee=@aeArr,avion=@avi,departTheorique=@depThe,departReel=@depRe,arriveeTheorique=@arrThe,arriveeReelle=@arrRe, prixEco=@priEco, prixBusiness=@priBus, prixPremium=@priPre WHERE id = @id";
+            string query = "UPDATE vol SET aeroport_depart_id=@aeDep,aeroport_arrivee_id=@aeArr,avion_id=@avi,depart_theorique=@depThe,depart_reel=@depRe,arrivee_theorique=@arrThe,arrivee_reelle=@arrRe, prix_eco=@priEco, prix_business=@priBus, prix_premium=@priPre WHERE id = @id";
             MySqlCommand cmd = new MySqlCommand(query, connection);
             cmd.Parameters.AddWithValue("@aeDep", v.AeroportDepartProperty);
             cmd.Parameters.AddWithValue("@aeArr", v.AeroportArriveeProperty);
@@ -75,7 +76,7 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
         public static void InsertVol(int aeroportDepart, int aeroportArrivee, int avion, DateTime departTheorique, DateTime departReel, DateTime arriveeTheorique, DateTime arriveeReelle, Decimal prixEco, Decimal prixBusiness, Decimal prixPremium)
         {
             connection.Open();
-            string query = "INSERT INTO vol(aeroportDepart, aeroportArrivee, avion, departTheorique, departReel, arriveeTheorique, arriveeReelle, prixEco, prixBusiness, prixPremium) VALUES(@aeDep,@aeArr,@avi,@depThe,@depRe,@arrThe,@arrRe,@priEco,@priBus,@priPre)";
+            string query = "INSERT INTO vol(aeroport_depart_id, aeroport_arrivee_id, avion_id, depart_theorique, depart_reel, arrivee_theorique, arrivee_reelle, prix_eco, prix_business, prix_premium) VALUES(@aeDep,@aeArr,@avi,@depThe,@depRe,@arrThe,@arrRe,@priEco,@priBus,@priPre)";
             MySqlCommand cmd = new MySqlCommand(query, connection);
             cmd.Parameters.AddWithValue("@aeDep", aeroportDepart);
             cmd.Parameters.AddWithValue("@aeArr", aeroportArrivee);
@@ -94,10 +95,15 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
         public static void DeleteVol(int id)
         {
             connection.Open();
-            string query = "DELETE FROM vol WHERE id = @id";
-            MySqlCommand cmd = new MySqlCommand(query, connection);
-            cmd.Parameters.AddWithValue("@id", id);
-            cmd.ExecuteNonQuery();
+            string queryBillet = "DELETE FROM billet WHERE vol_id = @id";
+            MySqlCommand cmdBillet = new MySqlCommand(queryBillet, connection);
+            cmdBillet.Parameters.AddWithValue("@id", id);
+            cmdBillet.ExecuteNonQuery();
+
+            string queryVol = "DELETE FROM vol WHERE id = @id";
+            MySqlCommand cmdVol = new MySqlCommand(queryVol, connection);
+            cmdVol.Parameters.AddWithValue("@id", id);
+            cmdVol.ExecuteNonQuery();
             connection.Close();
         }
 
@@ -119,6 +125,7 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
 
             return lastId;
         }
+
 
     }
 }

@@ -11,7 +11,8 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
 {
     public class AeroportDAL
     {
-        private static MySqlConnection connection = BDD_connexion.GetConnection();
+        private static BDD_connexion bddConnection = new BDD_connexion();
+        private static MySqlConnection connection = bddConnection.Connection;
 
         public static void SelectAeroport(ObservableCollection<Aeroport> ObsColAeroport)
         {
@@ -54,10 +55,15 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
         public static void DeleteAeroport(int id)
         {
             connection.Open();
-            string query = "DELETE FROM Aeroport WHERE id = @id";
-            MySqlCommand cmd = new MySqlCommand(query, connection);
-            cmd.Parameters.AddWithValue("@id", id);
-            cmd.ExecuteNonQuery();
+            string queryVol = "DELETE FROM vol WHERE aeroport_depart_id = (SELECT id FROM aeroport WHERE id = @id) OR aeroport_arrivee_id = (SELECT id FROM aeroport WHERE id = @id)";
+            MySqlCommand cmdVol = new MySqlCommand(queryVol, connection);
+            cmdVol.Parameters.AddWithValue("@id", id);
+            cmdVol.ExecuteNonQuery();
+
+            string queryAeroport = "DELETE FROM Aeroport WHERE id = @id";
+            MySqlCommand cmdAeroport = new MySqlCommand(queryAeroport, connection);
+            cmdAeroport.Parameters.AddWithValue("@id", id);
+            cmdAeroport.ExecuteNonQuery();
             connection.Close();
         }
 

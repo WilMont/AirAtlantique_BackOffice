@@ -11,7 +11,8 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
 {
     public class UtilisateurDAL
     {
-        private static MySqlConnection connection = BDD_connexion.GetConnection();
+        private static BDD_connexion bddConnection = new BDD_connexion();
+        private static MySqlConnection connection = bddConnection.Connection;
 
         public static void SelectUtilisateur(ObservableCollection<Utilisateur> ObsColUtilisateur)
         {
@@ -69,6 +70,16 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
             cmd.Parameters.AddWithValue("@tel", u.NumeroTelephoneProperty);
             cmd.Parameters.AddWithValue("@id", u.IdProperty);
 
+            cmd.ExecuteNonQuery();
+            connection.Close();
+        }
+
+        public static void DeleteUtilisateur(int id)
+        {
+            connection.Open();
+            string query = "DELETE FROM utilisateur WHERE id = @id";
+            MySqlCommand cmd = new MySqlCommand(query, connection);
+            cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();
             connection.Close();
         }

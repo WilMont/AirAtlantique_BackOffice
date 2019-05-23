@@ -190,13 +190,7 @@ namespace AirAtlantique_Csharp.ViewModels
         private void SubmitExecute(object parameter)
         {
             AvionDAL.InsertAvion(NewModele, NewMotorisation, NewCapacite, NewNbPlacesPremium, NewNbPlacesBusiness, NewNbPlacesEco);
-
-            NewModele = null;
-            NewMotorisation = null;
-            NewCapacite = 0;
-            NewNbPlacesPremium = 0;
-            NewNbPlacesBusiness = 0;
-            NewNbPlacesEco = 0;
+            
 
             MessageBox.Show("L'avion a bien été crée");
         }
@@ -239,6 +233,8 @@ namespace AirAtlantique_Csharp.ViewModels
             {
                 //Suppression de l'avion
                 AvionDAL.DeleteAvion(AvionSelectionne.IdProperty);
+                MessageBox.Show("L'avion a bien été supprimé.");
+
             }
             else if (dialogResult == MessageBoxResult.No)
             {
@@ -252,6 +248,7 @@ namespace AirAtlantique_Csharp.ViewModels
 
         private bool CanDeleteExecute(object parameter)
         {
+            try { 
             if (string.IsNullOrEmpty(this.AvionSelectionne.IdProperty.ToString()) || string.IsNullOrEmpty(this.AvionSelectionne.MotorisationProperty) || string.IsNullOrEmpty(this.AvionSelectionne.CapaciteProperty.ToString()) || string.IsNullOrEmpty(this.AvionSelectionne.NbPlacesPremiumProperty.ToString()) || string.IsNullOrEmpty(this.AvionSelectionne.NbPlacesBusinessProperty.ToString()) || string.IsNullOrEmpty(this.AvionSelectionne.NbPlacesEcoProperty.ToString()))
             {
                 return false;
@@ -259,6 +256,12 @@ namespace AirAtlantique_Csharp.ViewModels
             else
             {
                 return true;
+            }
+        }
+            catch
+            {
+                MessageBox.Show("Pour supprimer un avion, vous devez en sélectionner un.");
+                return false;
             }
         }
         #endregion

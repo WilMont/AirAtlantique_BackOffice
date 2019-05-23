@@ -12,7 +12,8 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
 {
     public class AvionDAL
     {
-        private static MySqlConnection connection = BDD_connexion.GetConnection();
+        private static BDD_connexion bddConnection = new BDD_connexion();
+        private static MySqlConnection connection = bddConnection.Connection;
 
         public static void SelectAvion(ObservableCollection<Avion> ObsColAvion)
         {
@@ -58,10 +59,20 @@ namespace AirAtlantique_Csharp.ViewModels.Queries
         public static void DeleteAvion(int id)
         {
             connection.Open();
-            string query = "DELETE FROM avion WHERE id = @id";
-            MySqlCommand cmd = new MySqlCommand(query, connection);
-            cmd.Parameters.AddWithValue("@id", id);
-            cmd.ExecuteNonQuery();
+            string queryBillet = "DELETE FROM billet WHERE vol_id = (SELECT id FROM vol WHERE avion_id = @id)";
+            MySqlCommand cmdBillet = new MySqlCommand(queryBillet, connection);
+            cmdBillet.Parameters.AddWithValue("@id", id);
+            cmdBillet.ExecuteNonQuery();
+
+            string queryVol = "DELETE FROM vol WHERE avion_id = @id";
+            MySqlCommand cmdVol = new MySqlCommand(queryVol, connection);
+            cmdVol.Parameters.AddWithValue("@id", id);
+            cmdVol.ExecuteNonQuery();
+
+            string queryAvion = "DELETE FROM avion WHERE id = @id";
+            MySqlCommand cmdAvion = new MySqlCommand(queryAvion, connection);
+            cmdAvion.Parameters.AddWithValue("@id", id);
+            cmdAvion.ExecuteNonQuery();
             connection.Close();
         }
 

@@ -21,7 +21,8 @@ namespace AirAtlantique_Csharp.ViewModels
             try
             {
                 int lastId = lastId = VolDAL.GetLastId();
-                Vol vol = new Vol(lastId, 0, 0, 0, Convert.ToDateTime("01/01/2000 00:00:01"), Convert.ToDateTime("01/01/2000 00:00:01"), Convert.ToDateTime("01/01/2000 00:00:01"), Convert.ToDateTime("01/01/2000 00:00:01"), Convert.ToDecimal(0.00), Convert.ToDecimal(0.00), Convert.ToDecimal(0.00));
+                Vol Vol = new Vol(lastId, 0, 0, 0, Convert.ToDateTime("01/01/2001 00:00:01"), Convert.ToDateTime("01/01/2001 00:00:01"), Convert.ToDateTime("02/02/2001 00:00:01"), Convert.ToDateTime("02/02/2001 00:00:01"), Convert.ToDecimal(00.00), Convert.ToDecimal(00.00), Convert.ToDecimal(00.00));
+
             }
             catch
             {
@@ -33,6 +34,15 @@ namespace AirAtlantique_Csharp.ViewModels
             {
                 ListeVols = new ObservableCollection<Vol>();
                 VolDAL.SelectVol(ListeVols);
+
+                ListeAvions = new ObservableCollection<Avion>();
+                AvionDAL.SelectAvion(ListeAvions);
+
+                ListeAeroportsDepart = new ObservableCollection<Aeroport>();
+                AeroportDAL.SelectAeroport(ListeAeroportsDepart);
+
+                ListeAeroportsArrivee = new ObservableCollection<Aeroport>();
+                AeroportDAL.SelectAeroport(ListeAeroportsArrivee);
             }
             catch
             {
@@ -64,6 +74,69 @@ namespace AirAtlantique_Csharp.ViewModels
             }
         }
 
+        private Avion _avion;
+        public Avion Avion
+        {
+            get { return _avion; }
+            set { _avion = value; NotifyPropertyChanged("Avion"); }
+        }
+
+        private ObservableCollection<Avion> _listeAvions;
+        public ObservableCollection<Avion> ListeAvions
+        {
+            get
+            {
+                return _listeAvions;
+            }
+            set
+            {
+                _listeAvions = value;
+                NotifyPropertyChanged("ListeAvions");
+            }
+        }
+
+        private Aeroport _aeroportDepart;
+        public Aeroport AeroportDepart
+        {
+            get { return _aeroportDepart; }
+            set { _aeroportDepart = value; NotifyPropertyChanged("AeroportDepart"); }
+        }
+
+        private ObservableCollection<Aeroport> _listeAeroportsDepart;
+        public ObservableCollection<Aeroport> ListeAeroportsDepart
+        {
+            get
+            {
+                return _listeAeroportsDepart;
+            }
+            set
+            {
+                _listeAeroportsDepart = value;
+                NotifyPropertyChanged("ListeAeroportsDepart");
+            }
+        }
+
+        private Aeroport _aeroportArrivee;
+        public Aeroport AeroportArrivee
+        {
+            get { return _aeroportArrivee; }
+            set { _aeroportArrivee = value; NotifyPropertyChanged("AeroportArrivee"); }
+        }
+
+        private ObservableCollection<Aeroport> _listeAeroportsArrivee;
+        public ObservableCollection<Aeroport> ListeAeroportsArrivee
+        {
+            get
+            {
+                return _listeAeroportsArrivee;
+            }
+            set
+            {
+                _listeAeroportsArrivee = value;
+                NotifyPropertyChanged("ListeAeroportsArrivee");
+            }
+        }
+
         //Propriétés pour la création d'un vol.
         #region Créer vol
         private int _newAeroportDepart;
@@ -81,7 +154,7 @@ namespace AirAtlantique_Csharp.ViewModels
         }
 
         private int _newAeroportArrivee;
-        public int NewNewAeroportArrivee
+        public int NewAeroportArrivee
         {
             get { return this._newAeroportArrivee; }
             set
@@ -257,23 +330,21 @@ namespace AirAtlantique_Csharp.ViewModels
 
         private void SubmitExecute(object parameter)
         {
-            VolDAL.InsertVol(NewAeroportDepart, NewNewAeroportArrivee, NewAvion, NewDepartTheorique, NewDepartReel, NewArriveeTheorique, NewArriveeReelle, NewPrixEco, NewPrixBusiness, NewPrixPremium);
-
-            
+            VolDAL.InsertVol(NewAeroportDepart, NewAeroportArrivee, NewAvion, NewDepartTheorique, NewDepartReel, NewArriveeTheorique, NewArriveeReelle, NewPrixEco, NewPrixBusiness, NewPrixPremium);
 
             MessageBox.Show("Le vol a bien été crée");
         }
 
         private bool CanSubmitExecute(object parameter)
         {
-            if ((NewAeroportDepart == 0) || (NewNewAeroportArrivee == 0) || string.IsNullOrEmpty(NewDepartTheorique.ToString()) || string.IsNullOrEmpty(NewArriveeTheorique.ToString()) || string.IsNullOrEmpty(NewPrixEco.ToString()) || string.IsNullOrEmpty(NewPrixBusiness.ToString()) || string.IsNullOrEmpty(NewPrixPremium.ToString()))
+            if ((NewAeroportDepart == 0) || (NewAeroportArrivee == 0) || (NewAeroportDepart == NewAeroportArrivee) || (NewDepartTheorique > NewArriveeTheorique) || (NewDepartTheorique == NewArriveeTheorique) ||  string.IsNullOrEmpty(NewDepartTheorique.ToString()) || string.IsNullOrEmpty(NewArriveeTheorique.ToString()) || string.IsNullOrEmpty(NewPrixEco.ToString()) || string.IsNullOrEmpty(NewPrixBusiness.ToString()) || string.IsNullOrEmpty(NewPrixPremium.ToString()) || string.IsNullOrEmpty(NewAvion.ToString()))
             {
                 return false;
             }
             else
             {
                 return true;
-            }
+            } 
         }
         #endregion
 
@@ -302,6 +373,8 @@ namespace AirAtlantique_Csharp.ViewModels
             {
                 //Suppression du vol
                 VolDAL.DeleteVol(VolSelectionne.IdProperty);
+                MessageBox.Show("Le vol a bien été supprimé.");
+
             }
             else if (dialogResult == MessageBoxResult.No)
             {
@@ -315,13 +388,21 @@ namespace AirAtlantique_Csharp.ViewModels
 
         private bool CanDeleteExecute(object parameter)
         {
-            if ((NewAeroportDepart == 0) || (NewNewAeroportArrivee == 0) || string.IsNullOrEmpty(NewDepartTheorique.ToString()) || string.IsNullOrEmpty(NewArriveeTheorique.ToString()) || string.IsNullOrEmpty(NewPrixEco.ToString()) || string.IsNullOrEmpty(NewPrixBusiness.ToString()) || string.IsNullOrEmpty(NewPrixPremium.ToString()))
+            try
             {
-                return false;
+                if (string.IsNullOrEmpty(this.VolSelectionne.IdProperty.ToString()) || string.IsNullOrEmpty(this.VolSelectionne.AeroportDepartProperty.ToString()) || string.IsNullOrEmpty(this.VolSelectionne.AeroportArriveeProperty.ToString()) || string.IsNullOrEmpty(this.VolSelectionne.AvionProperty.ToString()) || string.IsNullOrEmpty(this.VolSelectionne.DepartTheoriqueProperty.ToString()) || string.IsNullOrEmpty(this.VolSelectionne.DepartReelProperty.ToString()) || string.IsNullOrEmpty(this.VolSelectionne.ArriveeTheoriqueProperty.ToString()) || string.IsNullOrEmpty(this.VolSelectionne.ArriveeReelleProperty.ToString()) || string.IsNullOrEmpty(this.VolSelectionne.PrixEcoProperty.ToString()) || string.IsNullOrEmpty(this.VolSelectionne.PrixBusinessProperty.ToString()) || string.IsNullOrEmpty(this.VolSelectionne.PrixPremiumProperty.ToString()))
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
             }
-            else
+            catch
             {
-                return true;
+                MessageBox.Show("Pour supprimer un vol, vous devez en sélectionner un.");
+                return false;
             }
         }
         #endregion
